@@ -7,25 +7,37 @@ package com.example.jason.localdealsnotifier;
 public class Promotion {
     //name and address string
     private String company;
-    private String address;
+    private String message;
+    private String distance;
 
-    public Promotion() {
+    public Promotion(String company, String message, String distance) {
       /*Blank default constructor essential for Firebase*/
+        this.company = company;
+        this.message = message;
+        this.distance = distance;
     }
     //Getters and setters
     public String getCompany() {
         return company;
     }
 
-    public void setName(String name) {
+    public void setCompany(String name) {
         this.company = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getMessage() {
+        return message;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String message) {
+        this.distance = distance;
     }
 }
