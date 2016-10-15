@@ -15,19 +15,27 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
     private List<Promotion> promotionList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private PromotionsAdapter mAdapter;
-    private EditText editTextName;
-    private EditText editTextAddress;
-    private TextView textViewPersons;
-    private Button buttonSave;
+    private PromotionsAdapter mPromotionsAdapter;
+    private LinearLayoutManager linearLayoutManager;
+    private PromotionsAdapter mRecipeAdapter;
+    private DatabaseReference mDatabaseRef;
+    private DatabaseReference childRef;
+//    private EditText editTextName;
+//    private EditText editTextAddress;
+//    private TextView textViewPersons;
+//    private Button buttonSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +44,20 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new PromotionsAdapter(promotionList);
+//        mAdapter = new PromotionsAdapter(promotionList);
+
+
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        childRef = mDatabaseRef.child("recipes");
+        mPromotionsAdapter = new PromotionsAdapter(Promotion.class, R.layout.promotion_list_row, PromotionsAdapter.MyViewHolder.class, childRef, this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(mPromotionsAdapter);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+//        recyclerView.setAdapter(mAdapter);
 
         prepareMovieData();
 
@@ -56,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //                //Creating firebase object
-//                Firebase ref = new Firebase(Config.FIREBASE_URL);
+                Firebase ref = new Firebase(Config.FIREBASE_URL);
 //
 //                //Getting values to store
 //                String name = editTextName.getText().toString().trim();
@@ -73,27 +90,27 @@ public class MainActivity extends AppCompatActivity {
 //                ref.child("Promotion").setValue(promotion);
 //
 //
-//                //Value event listener for realtime data update
-//                ref.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot snapshot) {
-//                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-//                            //Getting the data from snapshot
-//                            Promotion promotion = postSnapshot.getValue(Promotion.class);
-//
-//                            //Adding it to a string
-//                            String string = "Name: "+ promotion.getCompany()+"\nAddress: "+ promotion.getAddress()+"\n\n";
-//
-//                            //Displaying it on textview
+                //Value event listener for realtime data update
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                            //Getting the data from snapshot
+                            Promotion promotion = postSnapshot.getValue(Promotion.class);
+
+                            //Adding it to a string
+                            String string = "Name: "+ promotion.getCompany()+"\nAddress: "+ promotion.getMessage()+"\n\n";
+
+                            //Displaying it on textview
 //                            textViewPersons.setText(string);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(FirebaseError firebaseError) {
-//                        System.out.println("The read failed: " + firebaseError.getMessage());
-//                    }
-//                });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+                        System.out.println("The read failed: " + firebaseError.getMessage());
+                    }
+                });
 //
 //            }
 //        });
