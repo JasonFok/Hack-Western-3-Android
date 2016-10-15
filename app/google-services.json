@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "173024592418",
+    "firebase_url": "https://hackwestern3backendtest.firebaseio.com",
+    "project_id": "hackwestern3backendtest",
+    "storage_bucket": "hackwestern3backendtest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173024592418:android:9da7fbbed74e5ac4",
+        "android_client_info": {
+          "package_name": "com.example.jason.localdealsnotifier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173024592418-1i7e5ostedfm6p93saa659nqabp2ohm9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jason.localdealsnotifier",
+            "certificate_hash": "A0CF0CB25A6AE8BAD6B17138DEFE66E12193740F"
+          }
+        },
+        {
+          "client_id": "173024592418-444re0judmr7dmvmk1saeva963iug6p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpdZc3eghuNIkc7Y1sI_hgMsKxwN-DcGk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173024592418-444re0judmr7dmvmk1saeva963iug6p1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

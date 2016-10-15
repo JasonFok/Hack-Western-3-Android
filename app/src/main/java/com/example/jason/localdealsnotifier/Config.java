@@ -5,7 +5,7 @@ package com.example.jason.localdealsnotifier;
  */
 
 public class Config {
-    public static final String FIREBASE_URL = "https://hackwestern3-2ebd2.firebaseio.com/";
+    public static final String FIREBASE_URL = "https://hackwestern3backendtest.firebaseio.com/";
 
 
 }
