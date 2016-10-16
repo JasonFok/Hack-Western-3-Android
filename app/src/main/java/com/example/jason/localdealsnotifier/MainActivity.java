@@ -12,11 +12,8 @@ import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.common.ConnectionResult;
@@ -45,7 +42,7 @@ public class MainActivity extends ActionBarActivity implements
     private PromotionsAdapter mAdapter;
     private EditText editTextName;
     private EditText editTextAddress;
-    private Button buttonSave;
+
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference userDataRef;
@@ -86,8 +83,6 @@ public class MainActivity extends ActionBarActivity implements
     protected Location mCurrentLocation;
 
     // UI Widgets.
-    protected Button mStartUpdatesButton;
-    protected Button mStopUpdatesButton;
     protected TextView mLastUpdateTimeTextView;
     protected TextView mLatitudeTextView;
     protected TextView mLongitudeTextView;
@@ -123,8 +118,6 @@ public class MainActivity extends ActionBarActivity implements
         startService(new Intent(this, MyFirebaseMessagingService.class));
 
         // Locate the UI widgets.
-        mStartUpdatesButton = (Button) findViewById(R.id.start_updates_button);
-        mStopUpdatesButton = (Button) findViewById(R.id.stop_updates_button);
         mLatitudeTextView = (TextView) findViewById(R.id.latitude_text);
         mLongitudeTextView = (TextView) findViewById(R.id.longitude_text);
         mLastUpdateTimeTextView = (TextView) findViewById(R.id.last_update_time_text);
@@ -134,7 +127,7 @@ public class MainActivity extends ActionBarActivity implements
         mLongitudeLabel = getResources().getString(R.string.longitude_label);
         mLastUpdateTimeLabel = getResources().getString(R.string.last_update_time_label);
 
-        mRequestingLocationUpdates = false;
+        mRequestingLocationUpdates = true;
         mLastUpdateTime = "";
 
         // Update values using data stored in the Bundle.
@@ -220,7 +213,6 @@ public class MainActivity extends ActionBarActivity implements
             if (savedInstanceState.keySet().contains(REQUESTING_LOCATION_UPDATES_KEY)) {
                 mRequestingLocationUpdates = savedInstanceState.getBoolean(
                         REQUESTING_LOCATION_UPDATES_KEY);
-                setButtonsEnabledState();
             }
 
             // Update the value of mCurrentLocation from the Bundle and update the UI to show the
@@ -282,29 +274,6 @@ public class MainActivity extends ActionBarActivity implements
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-    /**
-     * Handles the Start Updates button and requests start of location updates. Does nothing if
-     * updates have already been requested.
-     */
-    public void startUpdatesButtonHandler(View view) {
-        if (!mRequestingLocationUpdates) {
-            mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
-            startLocationUpdates();
-        }
-    }
-
-    /**
-     * Handles the Stop Updates button, and requests removal of location updates. Does nothing if
-     * updates were not previously requested.
-     */
-    public void stopUpdatesButtonHandler(View view) {
-        if (mRequestingLocationUpdates) {
-            mRequestingLocationUpdates = false;
-            setButtonsEnabledState();
-            stopLocationUpdates();
-        }
-    }
 
     /**
      * Requests location updates from the FusedLocationApi.
@@ -316,20 +285,7 @@ public class MainActivity extends ActionBarActivity implements
                 mGoogleApiClient, mLocationRequest, this);
     }
 
-    /**
-     * Ensures that only one button is enabled at any time. The Start Updates button is enabled
-     * if the user is not requesting location updates. The Stop Updates button is enabled if the
-     * user is requesting location updates.
-     */
-    private void setButtonsEnabledState() {
-        if (mRequestingLocationUpdates) {
-            mStartUpdatesButton.setEnabled(false);
-            mStopUpdatesButton.setEnabled(true);
-        } else {
-            mStartUpdatesButton.setEnabled(true);
-            mStopUpdatesButton.setEnabled(false);
-        }
-    }
+
 
     /**
      * Updates the latitude, the longitude, and the last location time in the UI.
@@ -448,8 +404,8 @@ public class MainActivity extends ActionBarActivity implements
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
         updateUI();
         updateUserData();
-        Toast.makeText(this, getResources().getString(R.string.location_updated_message),
-                Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, getResources().getString(R.string.location_updated_message),
+                //Toast.LENGTH_SHORT).show();
     }
 
     @Override
