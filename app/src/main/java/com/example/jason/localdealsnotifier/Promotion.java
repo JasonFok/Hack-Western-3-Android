@@ -26,8 +26,8 @@ public class Promotion {
         return company;
     }
 
-    public void setCompany(String name) {
-        this.company = name;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getMessage() {
