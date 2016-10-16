@@ -2,6 +2,8 @@ package com.example.jason.localdealsnotifier;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class PromoDetailsActivity extends AppCompatActivity {
 
@@ -11,7 +13,7 @@ public class PromoDetailsActivity extends AppCompatActivity {
 
     private String company;
     private String message;
-    private String distanceData;
+    private String distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +21,23 @@ public class PromoDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_promo_details);
 
         if (getIntent() != null) {
-            company = getIntent().getParcelableExtra(COMPANY_DATA);
-            message = getIntent().getParcelableExtra(MESSAGE_DATA);
-            distanceData = getIntent().getParcelableExtra(DISTANCE_DATA);
-
+            company = getIntent().getStringExtra(COMPANY_DATA);
+            message = getIntent().getStringExtra(MESSAGE_DATA);
+            distance = getIntent().getStringExtra(DISTANCE_DATA);
         }
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.activity_promo_details);
+        TextView companyTextView = (TextView)linearLayout.findViewById(R.id.companyD);
+        TextView messageTextView = (TextView)linearLayout.findViewById(R.id.messageD);
+        TextView distanceTextView = (TextView)linearLayout.findViewById(R.id.distanceD);
+
+        companyTextView.setText(company);
+        messageTextView.setText(message);
+        distanceTextView.setText(distance);
+
+
+
+
+
     }
 }

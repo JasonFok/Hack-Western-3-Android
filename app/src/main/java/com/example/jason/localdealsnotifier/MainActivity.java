@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         textViewPersons = (TextView) findViewById(R.id.textViewPersons);
 
         mDatabase = FirebaseDatabase.getInstance();
-        userInfoRef = mDatabase.getReference("UserInput");
+//        userInfoRef = mDatabase.getReference("UserInput");
         allPromotionsRef = mDatabase.getReference("FilteredPromotions");
 
         //Value event listener for realtime data update
