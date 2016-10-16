@@ -22,11 +22,13 @@ public class DeviceController {
     private Thread workerThread;
     private boolean stopWorker;
     private int readBufferPosition = 0;
+    private String message;
     byte[] readBuffer;
 
-    public DeviceController(BluetoothSocket socket, Context context) {
+    public DeviceController(BluetoothSocket socket, Context context, String message) {
         this.socket = socket;
         this.context = context;
+        this.message = message;
     }
 
     public void send(String input) {
@@ -57,13 +59,12 @@ public class DeviceController {
                         if(bytesAvailable >= 1)
                         {
                             byte[] packetBytes = new byte[bytesAvailable];
-//                            Log.d("test", Integer.toString(bytesAvailable));
                             socket.getInputStream().read(packetBytes);
 
                             for(int i=0;i<bytesAvailable;i++)
                             {
                                 byte b = packetBytes[i];
-                                Log.d("test", Integer.toString(b));
+
                                 if(b == delimiter)
                                 {
                                     byte[] encodedBytes = new byte[readBufferPosition];
@@ -75,8 +76,7 @@ public class DeviceController {
                                     {
                                         public void run()
                                         {
-                                            Log.d("test", "sending back");
-                                            send("test");
+                                            send(message);
                                         }
                                     });
                                 }
