@@ -42,7 +42,7 @@ public class Promotion {
         return distance;
     }
 
-    public void setDistance(String message) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
 }
