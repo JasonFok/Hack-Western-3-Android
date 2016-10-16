@@ -1,11 +1,12 @@
 package com.example.jason.localdealsnotifier;
 
+import android.bluetooth.BluetoothSocket;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class PromoDetailsActivity extends AppCompatActivity {
+public class PromoDetailsActivity extends AppCompatActivity implements ConnectDeviceCallback {
 
     public static final String COMPANY_DATA = "companyData";
     public static final String MESSAGE_DATA = "messageData";
@@ -38,6 +39,11 @@ public class PromoDetailsActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    @Override
+    public void processFinish(BluetoothSocket socket) {
 
     }
 }
