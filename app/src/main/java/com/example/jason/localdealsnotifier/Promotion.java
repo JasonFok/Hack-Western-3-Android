@@ -10,6 +10,11 @@ public class Promotion {
     private String message;
     private String distance;
 
+    public Promotion () {
+        //Empty Constructor
+    }
+
+
     public Promotion(String company, String message, String distance) {
       /*Blank default constructor essential for Firebase*/
         this.company = company;
@@ -21,8 +26,8 @@ public class Promotion {
         return company;
     }
 
-    public void setCompany(String name) {
-        this.company = name;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getMessage() {
@@ -37,7 +42,7 @@ public class Promotion {
         return distance;
     }
 
-    public void setDistance(String message) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
 }
