@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hack-Western-3-Android.iml" filepath="$PROJECT_DIR$/Hack-Western-3-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LocalDealsNotifier.iml" filepath="$PROJECT_DIR$/LocalDealsNotifier.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

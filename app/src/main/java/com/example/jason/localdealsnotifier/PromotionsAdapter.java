@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -64,7 +63,7 @@ public class PromotionsAdapter extends RecyclerView.Adapter<PromotionsAdapter.My
         Promotion movie = promotionsList.get(position);
         holder.company.setText(movie.getCompany());
         holder.message.setText(movie.getMessage());
-        holder.distance.setText(movie.getDistance());
+        holder.distance.setText(String.valueOf(Math.floor(movie.getDistance() * 1000) / 1000) + "km");
     }
 
     @Override

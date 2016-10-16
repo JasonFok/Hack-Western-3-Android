@@ -8,14 +8,14 @@ public class Promotion {
     //name and address string
     private String company;
     private String message;
-    private String distance;
+    private double distance;
 
     public Promotion () {
         //Empty Constructor
     }
 
 
-    public Promotion(String company, String message, String distance) {
+    public Promotion(String company, String message, double distance) {
       /*Blank default constructor essential for Firebase*/
         this.company = company;
         this.message = message;
@@ -38,11 +38,11 @@ public class Promotion {
         this.message = message;
     }
 
-    public String getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 }
