@@ -10,6 +10,11 @@ public class Promotion {
     private String message;
     private String distance;
 
+    public Promotion () {
+        //Empty Constructor
+    }
+
+
     public Promotion(String company, String message, String distance) {
       /*Blank default constructor essential for Firebase*/
         this.company = company;
