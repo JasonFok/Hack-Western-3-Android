@@ -1,8 +1,14 @@
 package com.example.jason.localdealsnotifier;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -164,4 +170,19 @@ public class MainActivity extends AppCompatActivity {
         promotionList.add(promotion);
     }
 
+    public void generateNotification(String title, String body) {
+        PendingIntent pi = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+        Resources r = getResources();
+        Notification notification = new NotificationCompat.Builder(this)
+                .setTicker(title)
+                .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setContentIntent(pi)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(0, notification);
+    }
 }
