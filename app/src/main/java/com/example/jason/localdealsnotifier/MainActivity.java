@@ -119,6 +119,9 @@ public class MainActivity extends ActionBarActivity implements
         userDataRef = mDatabase.getReference("UserData");
         allPromotionsRef = mDatabase.getReference("FilteredPromotions");
 
+        startService(new Intent(this, MyFirebaseInstanceIDService.class));
+        startService(new Intent(this, MyFirebaseMessagingService.class));
+
         // Locate the UI widgets.
         mStartUpdatesButton = (Button) findViewById(R.id.start_updates_button);
         mStopUpdatesButton = (Button) findViewById(R.id.stop_updates_button);
