@@ -1,17 +1,20 @@
 package com.example.jason.localdealsnotifier;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 //import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DataSnapshot;
@@ -44,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
 
-//        buttonSave = (Button) findViewById(R.id.buttonSave);
-//        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
-
         textViewPersons = (TextView) findViewById(R.id.textViewPersons);
 
         mDatabase = FirebaseDatabase.getInstance();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 //Getting the data from snapshot
                 String string = "";
-                List<Promotion> promotionListTemp = new ArrayList<>();
+                final List<Promotion> promotionListTemp = new ArrayList<>();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Promotion promo = postSnapshot.getValue(Promotion.class);
                     promotionListTemp.add(promo);
@@ -69,14 +69,17 @@ public class MainActivity extends AppCompatActivity {
 
                 recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-                mAdapter = new PromotionsAdapter(promotionListTemp);
+                mAdapter = new PromotionsAdapter(promotionListTemp, MainActivity.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(mLayoutManager);
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
                 recyclerView.setAdapter(mAdapter);
 
                 //Displaying it on textview
                 textViewPersons.setText(string);
+
+
             }
 
             @Override
@@ -105,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        });
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        mAdapter = new PromotionsAdapter(promotionList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 //
+//        mAdapter = new PromotionsAdapter(promotionList, this);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
+////        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter);
+////
         prepareMovieData();
     }
 
